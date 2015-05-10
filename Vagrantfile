@@ -6,6 +6,7 @@ Vagrant.configure( VAGRANTFILE_VERSION ) do |config|
   config.vm.define "ruby" do |ruby|
     ruby.vm.provider "docker" do |docker|
       docker.build_dir = "."
+      docker.vagrant_vagrantfile = "./docker/Vagrantfile"
 
       docker.name            = "basic-rails"
       docker.create_args     = ['-i', '-t']
@@ -20,8 +21,9 @@ Vagrant.configure( VAGRANTFILE_VERSION ) do |config|
   config.vm.define "db" do |db|
     db.vm.provider "docker" do |docker|
       docker.image   = "postgres"
-      docker.name    = "db"
+      docker.vagrant_vagrantfile = "./docker/Vagrantfile"
 
+      docker.name    = "db"
       docker.ports   = ["5432:5432"]
       docker.has_ssh = false
       docker.env = {
