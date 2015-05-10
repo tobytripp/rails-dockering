@@ -18,16 +18,16 @@ Work in progress.
    you'll need to set those yourself.  I set up forwarding for the
    Rails development server by overriding the default boot2docker VM
    configuration and adding my port-forwards there.  See
-   =docker/Vagrantfile=.
+   [[./docker/Vagrantfile][docker/Vagrantfile]]
 
-   Note also that the boot2docker image runs in RAM and therefore
+   Note also that the boot2docker[4] image runs in RAM and therefore
    doesn't persist its filesystem across reboots.  Switch to another
    docker host OS if this bothers you.
 
 ** Connecting to the docker host
 
    On hosts that don't support Docker natively, Vagrant will
-   automatically set-up a boot2docker[4] VM for you.  If you want to
+   automatically set up a boot2docker VM for you.  If you want to
    connect to this host for some reason, first you need to get its
    Vagrant ID:
 
@@ -90,9 +90,14 @@ Work in progress.
 * Resources
 
 [1] [[www.vagrantup.com][Vagrant]]
+
 [2] [[http://www.docker.com][Docker]]
+
 [3] [[https://github.com/mitchellh/vagrant/issues/3728][Vagrant, boot2docker, and port-forwarding]]
+
   * [[https://gist.github.com/audionerd/d7d77d9af080a7a87d9b][How to get around it]]
+
 [4] [[http://boot2docker.io][boot2docker]]
+
   * [[http://www.maori.geek.nz/post/vagrant_with_docker_how_to_set_up_postgres_elasticsearch_and_redis_on_mac_os_x][Vagrant with Docker: How to set up Postgres, Elasticsearch and Redis on Mac OS X]]
   * [[https://github.com/seapy/dockerfiles/blob/master/rails-nginx-unicorn/Dockerfile][Another example]]
