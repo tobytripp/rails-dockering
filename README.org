@@ -169,7 +169,21 @@ Work in progress.
   #+BEGIN_SRC sh
   $ docker build -t rails-image-1 .
   #+END_SRC
+  
+* Linking the Web Application to the Database
 
+  The link attribute will share a number of environment variables from the database container back 
+  through the link.  For our purposes, this includes:
+
+  #+BEGIN_SRC sh
+  $ env | grep -i db
+  DB_ENV_POSTGRES_USER=development
+  DB_ENV_POSTGRES_PASSWORD=730423d151b65e5e
+  DB_PORT_5432_TCP_ADDR=172.17.0.2
+  #+END_SRC
+  
+  So, you can reference these environment variables in the Rails =database.yml=.
+  
 * Resources
 
 [1] [[www.vagrantup.com][Vagrant]]
