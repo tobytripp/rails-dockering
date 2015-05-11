@@ -9,18 +9,18 @@ ADD Gemfile.lock $APP_HOME/
 
 RUN mkdir -p /var/bundle && chown -R app:app /var/bundle /usr/local/bundle
 
-# USER app
+USER app
 WORKDIR /var/www/html/app
 
 RUN cd $APP_HOME && bundle install --deployment --path /var/bundle
 
 ADD . $APP_HOME
-# USER root
+USER root
 RUN chown -R app:app $APP_HOME
 
 EXPOSE 3000
 
-# USER app
+USER app
 
 ENV RAILS_ENV development
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]

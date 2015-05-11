@@ -27,6 +27,9 @@ Work in progress.
   vagrant up rails
   #+END_SRC
 
+  With that started, the Rails application should be available at
+  [[http://localhost:3000][localhost:3000]]
+
 ** Port Forwarding
 
    Currently Vagrant will warn you that any ports you need forwarded
@@ -116,6 +119,56 @@ Work in progress.
    #+END_SRC
 
 * TODO Deploying the Container
+
+* Interacting with Docker Directly
+
+  Once you've ssh'd into the docker host, you can interact with the
+  docker containers directly.
+
+  List running containers:
+  #+BEGIN_SRC sh
+    $ docker ps
+    CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                    NAMES
+    956474a40697        49b4af74a5d0        "bundle exec rails s   49 minutes ago      Up 49 minutes       0.0.0.0:3000->3000/tcp   rails
+  #+END_SRC
+
+  List all containers by adding =-a=.
+
+  Start, stop, or remove a container:
+  #+BEGIN_SRC sh
+    $ docker stop rails
+    rails
+    $ docker start rails
+    rails
+    $ docker stop 956474a40697
+    956474a40697
+    $ docker rm rails
+    rails
+  #+END_SRC
+
+  List images (containers are started from images):
+  #+BEGIN_SRC sh
+    $ docker images
+    REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+    <none>              <none>              49b4af74a5d0        54 minutes ago      850.9 MB
+    <none>              <none>              16b3f1db5f01        About an hour ago   850.9 MB
+    ruby                2.2                 f0f149c3d6f7        9 days ago          777.5 MB
+  #+END_SRC
+
+  Remove an image:
+  #+BEGIN_SRC sh
+  $ docker rmi 16b3f1db5f01
+  #+END_SRC
+
+  Start a new container from an existing image:
+  #+BEGIN_SRC sh
+  $ docker run --name rails-1 -p 3000:3000 -it 16b3f1db5f01
+  #+END_SRC
+
+  Build a new image from a path including a Docker-file:
+  #+BEGIN_SRC sh
+  $ docker build -t rails-image-1 .
+  #+END_SRC
 
 * Resources
 
