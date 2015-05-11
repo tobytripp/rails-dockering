@@ -8,10 +8,9 @@ Vagrant.configure( VAGRANTFILE_VERSION ) do |config|
       docker.build_dir = "."
       docker.vagrant_vagrantfile = "./docker/Vagrantfile"
 
-      docker.privileged = true
       docker.name  = "rails"
       docker.ports = ['3000:3000']
-      # docker.link "db:db"
+      docker.link "db:db"
     end
   end
 
@@ -21,7 +20,7 @@ Vagrant.configure( VAGRANTFILE_VERSION ) do |config|
       docker.vagrant_vagrantfile = "./docker/Vagrantfile"
 
       docker.privileged = true
-      docker.volumes = ["/var/docker/postgresql:/data"]
+      docker.volumes = ["/var/docker/postgresql:/data"] # Not correct
       docker.name    = "db"
       docker.ports   = ["5432:5432"]
       docker.has_ssh = false

@@ -184,3 +184,5 @@ Work in progress.
   * [[https://github.com/mitchellh/vagrant/pull/3347][Vagrant Docker Provider]]
 
 [4] [[http://boot2docker.io][boot2docker]]
+
+[5] [[https://www.digitalocean.com/community/tutorials/docker-explained-how-to-containerize-and-use-nginx-as-a-proxy][Digital Ocean's Docker Tutorial]]
