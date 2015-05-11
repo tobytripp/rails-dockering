@@ -2,19 +2,35 @@
 
 Work in progress.
 
+** Configuration
+
+   The containers are configured by three components:
+
+   1. The [[./docker/Vagrantfile][vagrant configuration]] for the VM that hosts the [[http://www.docker.com][docker]]
+      daemon.  This configuration is referenced by:
+   2. the [[./Vagrantfile][vagrant configuration]] for the individual containers.  These
+      build the container using:
+   3. the [[./Dockerfile][docker configuration]] for the Rails container itself.
+
 * Running Things
 
-  The Docker[2] containers are boot-strapped with Vagrant[1].  Start them in
+  The [[http://www.docker.com][Docker]][2] containers are boot-strapped with [[http://www.vangrantup.com][Vagrant]][1].  Start them in
   the usual way:
 
   #+BEGIN_SRC sh
   vagrant up
   #+END_SRC
 
+  Start just the Rails container with:
+
+  #+BEGIN_SRC sh
+  vagrant up rails
+  #+END_SRC
+
 ** Port Forwarding
 
    Currently Vagrant will warn you that any ports you need forwarded
-   will not ne on the docker host VM[3] (if you're using one).  So,
+   will not be on the docker host VM[3] (if you're using one).  So,
    you'll need to set those yourself.  I set up forwarding for the
    Rails development server by overriding the default boot2docker VM
    configuration and adding my port-forwards there.  See
@@ -23,9 +39,19 @@ Work in progress.
    It's likely a good idea to start this vm up before you start the
    docker images.  Some say that there is a race condition.
 
-   Note also that the boot2docker[4] image runs in RAM and therefore
+   Note also that the [[http://boot2docker.io][boot2docker]][4] image runs in RAM and therefore
    doesn't persist its filesystem across reboots.  Switch to another
-   docker host OS if this bothers you.
+   docker host OS if this bothers you.  There's a [[./docker/Vagrantfile.ubuntu][Vagrantfile]] included
+   for that already.
+
+   Port forwards are also required by the containers themselves.
+   These forward ports from the docker host VM to the processes within
+   the containers.
+
+   Note also that, since requests to the server come from outside the
+   container, you must specify a bind address for the rails server
+   process.  As of version 4 Rails defaults to localhost and won't get
+   your requests.
 
 ** Connecting to the docker host
 
