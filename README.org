@@ -38,12 +38,13 @@ Work in progress.
    vagrant global-status
    #+END_SRC
 
-   #+RESULTS:
-   : id       name       provider   state    directory
-   : --------------------------------------------------------------------------------
-   : 0f27b5d  default    virtualbox running  /Users/toby/Code/Ruby/docker-test/docker
-   : 194646a  db         docker     running  /Users/toby/Code/Ruby/docker-test
-   : 425456d  ruby       docker     running  /Users/toby/Code/Ruby/docker-test
+   #+BEGIN_SRC fundamental
+   id       name       provider   state    directory
+   --------------------------------------------------------------------------------
+   0f27b5d  default    virtualbox running  /Users/toby/Code/Ruby/docker-test/docker
+   194646a  db         docker     running  /Users/toby/Code/Ruby/docker-test
+   425456d  ruby       docker     running  /Users/toby/Code/Ruby/docker-test
+   #+END_SRC
 
    Above, "default" is the name of our docker host.  With that we can
    do things like ssh into the virtual machine:
