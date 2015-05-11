@@ -1,6 +1,6 @@
 FROM ruby:2.2
 
-ENV APP_HOME /home/app
+ENV APP_HOME /var/www/html/app
 
 RUN adduser app --home $APP_HOME --shell /bin/bash --disabled-password --gecos ""
 
@@ -10,7 +10,7 @@ ADD Gemfile.lock $APP_HOME/
 RUN mkdir -p /var/bundle && chown -R app:app /var/bundle /usr/local/bundle
 
 # USER app
-WORKDIR /home/app
+WORKDIR /var/www/html/app
 
 RUN cd $APP_HOME && bundle install --deployment --path /var/bundle
 
@@ -23,4 +23,4 @@ EXPOSE 3000
 # USER app
 
 ENV RAILS_ENV development
-CMD bundle exec rails server
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]

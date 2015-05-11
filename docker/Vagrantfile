@@ -1,4 +1,8 @@
-Vagrant.configure("2") do |config|
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+VAGRANTFILE_VERSION = 2
+
+Vagrant.configure( VAGRANTFILE_VERSION ) do |config|
   config.vm.box = "mitchellh/boot2docker"
 
   config.vm.provider "virtualbox" do |v|
@@ -6,17 +10,17 @@ Vagrant.configure("2") do |config|
     # in TinyCore Linux, so tell Vagrant that so it can be smarter.
     v.check_guest_additions = false
     v.functional_vboxsf     = false
-    v.name = "docker-host"
+    v.name = "boot2docker-host"
   end
 
   # b2d doesn't support NFS
   config.nfs.functional = false
 
-  config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network(
+    "forwarded_port",
+    guest: 3000, host: 3000, auto_correct: true )
   config.vm.network "forwarded_port", guest: 5432, host: 5432
 
   # b2d doesn't persist filesystem between reboots
-  if config.ssh.respond_to?(:insert_key)
-    config.ssh.insert_key = false
-  end
+  config.ssh.insert_key = false if config.ssh.respond_to?(:insert_key)
 end
